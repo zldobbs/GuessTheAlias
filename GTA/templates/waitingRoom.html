@@ -3,8 +3,10 @@
   <div class="container">
     <div class="row">
       <p>Share this link with your fellow playmates</p>
-      <div class="card-panel">
-        <span>53xFI2</span>
+      <div class="col m6 push-m3 s12">
+        <div class="card-panel">
+          <span id="roomCode">53xFI2</span>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -24,10 +26,11 @@
         </div>
       </div>
       <div class="row">
-        {% if moderator %}<a href="/play" class="btn-large waves-effect">Start Game</a>{% endif %}
-        {% if !moderator %}
-        <p>Please wait for the moderator to start the game</p>
-        <img src="https://d13yacurqjgara.cloudfront.net/users/82092/screenshots/1073359/spinner.gif" alt="waiting...">
+        {% if moderator %}
+          <a href="/play" class="btn-large waves-effect">Start Game</a>
+        {% else %}
+          <p>Please wait for the moderator to start the game</p>
+          <img class="responsive-img circle" id="waiting" src="https://d13yacurqjgara.cloudfront.net/users/82092/screenshots/1073359/spinner.gif" alt="waiting...">
         {% endif %}
       </div>
     </div>
@@ -38,10 +41,10 @@
         socket.on('response', function(msg) {
             $('#playerList').append('<li class="collection-item">' + msg.name + '</li>');
         });
-        $('form#broadcast').submit(function(event) {
+        /*$('form#broadcast').submit(function(event) {
             socket.emit('my broadcast event', {data: $('#broadcast_data').val()});
             return false;
-        });
+        });*/
     });
   </script>
 {% endblock %}

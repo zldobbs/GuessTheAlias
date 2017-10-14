@@ -57,3 +57,11 @@ i {
 #nameField {
   border-bottom: 1px solid #7c7c7c;
 }
+
+#roomCode {
+  height: 85%;
+}
+
+#waiting {
+  margin: 0 auto;
+}
