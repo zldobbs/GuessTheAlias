@@ -1,7 +1,7 @@
 #!flask/bin/python
 import os, json
 from flask import Flask, render_template, request, redirect, url_for, session
-from sqlalchemy import sql
+#from sqlalchemy import sql
 from random import choice
 from string import ascii_uppercase, digits, hexdigits
 
@@ -40,7 +40,7 @@ def testFactForm():
 
 # temp route for testing
 @app.route('/testWaitingRoom', methods=['GET'])
-def testFactForm():
+def testWaitingRoom():
 	return render_template('waitingRoom.html')
 
 if __name__ == "__main__":
