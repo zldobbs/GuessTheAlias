@@ -32,13 +32,23 @@ def RoomPage():
 
 		if request.form['action'] == 'join':
 			roomCode = request.form["roomCode"]
-			return render_template('waitingRoomUser.html', code=roomCode)
+			if roomExists(roomCode):
+				return render_template('waitingRoomUser.html', code=roomCode)
+			return redirect(url_for('.LandingPage'))
+
+		if request.form['action'] == 'start':
+			return render_template('factForm.html', code=roomCode)
+
+		return 'Error: Incorrect action'
 
 	if request.method == 'GET':
 		#check DB if user is room mod
-		return render_template('waitingRoomUser.html', code=request.args['code'])
+		if roomExists(roomCode):
+			return render_template('waitingRoomUser.html', code=request.args['code'])
+		return redirect(url_for('.LandingPage'))
 
-	return 'Error: Incorrect action'
+def roomExists(roomCode):
+	return True
 
 @socketio.on('connect', namespace='/room')
 def connected():
@@ -59,10 +69,6 @@ def getHints():
 def testFactForm():
 	return render_template('factForm.html')
 
-# temp route for testing
-@app.route('/testWaitingRoom', methods=['GET'])
-def testWaitingRoom():
-	return render_template('waitingRoom.html')
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
