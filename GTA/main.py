@@ -1,12 +1,15 @@
 #!flask/bin/python
 import os, json
 from flask import Flask, render_template, request, redirect, url_for, session
-#from sqlalchemy import sql
+from flask_socketio import SocketIO, emit
+
 from random import choice
 from string import ascii_uppercase, digits, hexdigits
 
 app = Flask(__name__)
+# secret key for flask
 app.secret_key = 'FF137EE9744FFBEFC1495D3FA08A639FD9F7B57330212F30B470EA2BFB5CCF5B'
+socketio = SocketIO(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def LandingPage():
@@ -29,6 +32,17 @@ def RoomPage():
 	roomCode = request.args['code']
 	return roomCode + ' ' + session['userID']
 
+@socketio.on('connect', namespace='/room')
+def connected():
+    emit('response', {'name': 'Alice'})
+
+@socketio.on('getUserID', namespace='/getUserID')
+def GetUserID():
+	emit('UserID response', {'userID': session['userID']})
+
+
+
+
 @app.route('/sendHints', methods=['POST'])
 def getHints():
 	pass
@@ -45,4 +59,4 @@ def testWaitingRoom():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    socketio.run(app, host='0.0.0.0', port=port)
