@@ -42,13 +42,13 @@ def joinRoom(data):
 def createRoom(data):
 	roomCode = ''.join(choice(ascii_uppercase + digits) for i in range(6))
 	join_room(roomCode)
-	creator = session['userID'] # save in DB
+	# save session['userID'] into DB
 	emit('roomResponse', {'roomCode': roomCode})
 
 @app.route('/room/<roomCode>', methods=['GET'])
 def roomPage(roomCode):
 	if roomExists(roomCode):
-		if session['userID'] == 'creatorFromDB':
+		if userIsMod(roomCode, session['userID']):
 			return render_template('waitingRoomMod.html', code=roomCode)
 		return render_template('waitingRoomUser.html', code=roomCode)
 	return redirect(url_for('.LandingPage'))
@@ -56,9 +56,14 @@ def roomPage(roomCode):
 @socketio.on('start', namespace='/room')
 def startGame(data):
 	roomCode = data['roomCode']
+	if userIsMod(roomCode, session['userID']):
+		pass
 	### emit('roomResponse', {'roomCode': roomCode})
 
 def roomExists(roomCode):
+	return True
+
+def userIsMod(roomCode, userID):
 	return True
 
 @socketio.on('getUserID', namespace='/getUserID')
