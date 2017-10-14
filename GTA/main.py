@@ -22,30 +22,21 @@ def LandingPage():
 def AboutPage():
 	return render_template('about.html')
 
-"""
-@app.route('/createRoom', methods=['GET']) # change to createRoom at frontend
-def createRoom():
-	roomCode = ''.join(choice(ascii_uppercase + digits) for i in range(6))
-	creator = session['userID']
-	return redirect(url_for('.RoomPage', code=roomCode, creator=creator))
-
-@app.route('/joinRoom', methods=['POST']) # change to createRoom at frontend
-def joinRoom():
-	roomCode = request.form["roomCode"]
-	# check for existing room before redirecting
-	return redirect(url_for('.RoomPage', code=roomCode))
-"""
-
 @app.route('/room', methods=['GET', 'POST'])
 def RoomPage():
-	if request.form['action'] == 'create':
-		roomCode = ''.join(choice(ascii_uppercase + digits) for i in range(6))
-		creator = session['userID']
-		return render_template('waitingRoomMod.html', code=roomCode)
+	if request.method == 'POST':
+		if request.form['action'] == 'create':
+			roomCode = ''.join(choice(ascii_uppercase + digits) for i in range(6))
+			creator = session['userID']
+			return render_template('waitingRoomMod.html', code=roomCode)
 
-	if request.form['action'] == 'join':
-		roomCode = request.form["roomCode"]
-		return render_template('waitingRoomUser.html', code=roomCode)
+		if request.form['action'] == 'join':
+			roomCode = request.form["roomCode"]
+			return render_template('waitingRoomUser.html', code=roomCode)
+
+	if request.method == 'GET':
+		#check DB if user is room mod
+		return render_template('waitingRoomUser.html', code=request.args['code'])
 
 	return 'Error: Incorrect action'
 
