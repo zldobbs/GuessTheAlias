@@ -6,7 +6,7 @@
       <p>If you have a room ID already, enter it below. If you're here to create a room, click the create button</p>
       {% if error %}<div class="card-panel deep-orange-darken-3"><span class="white-text"><strong>Error:</strong> {{ error }}{% endif %}</span></div>
     </div>
-    <form action="/joinRoom" method="post">
+    <form action="/room" method="post">
       <div class="row">
         <div class="input-field col m6 push-m3 s12">
           <input id="roomCode" type="text" name="roomCode" class="validate">
@@ -15,14 +15,15 @@
       </div>
       <div class="row">
         <div class="input-field col m6 push-m3 s12">
-          <button class="btn-large waves-effect" type="submit" name="action">Join</button>
+          <button class="btn-large waves-effect" type="submit" name="action" value="join">Join</button>
+        </div>
+      </div>
+      <div class="row">
+        
+        <div class="input-field col m6 push-m3 s12">
+          <button class="btn-large waves-effect" type="submit" name="action" value="create">Create</button>
         </div>
       </div>
     </form>
-    <div class="row">
-      <div class="col m6 push-m3 s12">
-        <a class="btn-large waves-effect waves-red" href="/createRoom">Create</a>
-      </div>
-    </div>
   </div>
 {% endblock %}
