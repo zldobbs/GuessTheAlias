@@ -3,30 +3,47 @@
   <div class="container">
     <div class="row">
       <h1>Guess the Alias</h1>
-      <p>If you have a room ID already, enter it below. If you're here to create a room, click the create button</p>
+      <p>Welcome to Guess the Alias! Please specify your name and room ID to get started</p>
       {% if error %}<div class="card-panel deep-orange-darken-3"><span class="white-text"><strong>Error:</strong> {{ error }}{% endif %}</span></div>
     </div>
-    <form action="/room" method="post">
-      <div class="row">
-        <div class="input-field col m3 push-m3 s12">
-          <input id="name" type="text" name="name" class="validate" required>
-          <label for="name">Name:</label>
-        </div>
-        <div class="input-field col m3 push-m3 s12">
-          <input id="roomCode" type="text" name="roomCode" class="validate">
-          <label for="roomCode">Room Code:</label>
-        </div>
+    <div class="row">
+      <div class="input-field col m3 push-m3 s12">
+        <input id="name" type="text" class="validate">
+        <label for="name">Name:</label>
       </div>
-      <div class="row">
-        <div class="input-field col m6 push-m3 s12">
-          <button class="btn-large waves-effect" type="submit" name="action" value="join">Join</button>
-        </div>
+      <div class="input-field col m3 push-m3 s12">
+        <input id="roomCode" type="text" class="validate">
+        <label for="roomCode">Room Code:</label>
       </div>
-      <div class="row">
-        <div class="input-field col m6 push-m3 s12">
-          <button class="btn-large waves-effect" type="submit" name="action" value="create">Create</button>
-        </div>
+    </div>
+    <div class="row">
+      <div class="input-field col m6 push-m3 s12">
+        <button class="btn-large waves-effect" id="joinButton" value="join">Join</button>
       </div>
-    </form>
+    </div>
+    <div class="row">
+      <p class="center-align">If you do not have a room ID, you may create your own and begin inviting friends!</p>
+    </div>
+    <div class="row">
+      <div class="input-field col m6 push-m3 s12">
+        <button class="btn-large waves-effect" id="createButton" value="create">Create</button>
+      </div>
+    </div>
   </div>
+  <script>
+  $(document).ready(function(){
+      var socket = io.connect('http://' + document.domain + ':' + location.port + '/room');
+      $('#joinButton').click(function() {
+        socket.emit('join', {
+          'name' : $('#name').val(),
+          'roomCode' : $('#roomCode').val()
+        });
+      });
+      $('#createButton').click(function() {
+        socket.emit('create', {
+          'name' : $('#name').val()
+        });
+      });
+  });
+  </script>
 {% endblock %}

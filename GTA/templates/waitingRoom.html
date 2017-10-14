@@ -1,14 +1,8 @@
-{% if code is none %}
-  <h1>THE CODE IS NONE!</h1>
-  <script>
-    window.location.replace("/");
-  </script>
-{% endif %}
 {% extends "layout.html" %}
 {% block body %}
   <div class="container">
     <div class="row">
-      <p>Share this link with your fellow playmates</p>
+      <p>Share this code with your fellow playmates</p>
       <div class="col m6 push-m3 s12">
         <div class="card-panel">
           <span id="roomCode">{{ code }}</span>
