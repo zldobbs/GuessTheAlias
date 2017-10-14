@@ -23,23 +23,25 @@
           </ul>
         </div>
       </div>
+      <div class="row">
+        {% if moderator %}<a href="/play" class="btn-large waves-effect">Start Game</a>{% endif %}
+        {% if !moderator %}
+        <p>Please wait for the moderator to start the game</p>
+        <img src="https://d13yacurqjgara.cloudfront.net/users/82092/screenshots/1073359/spinner.gif" alt="waiting...">
+        {% endif %}
+      </div>
     </div>
   </div>
-  <!--<script>
-    // update the waiting room...
-    $(function() {
-      var table = setInterval(fillTable(), 5000);
-
-      function fillTable() {
-        $.ajax({
-          url: '/findUsers',
-          data: 'roomCode',
-          type: 'GET',
-          success: function(response) {
-            $('#playerList').append('<li>' + response + '</li>');
-          }
+  <script>
+    $(document).ready(function(){
+        var socket = io.connect('http://' + document.domain + ':' + location.port + '/room');
+        socket.on('response', function(msg) {
+            $('#playerList').append('<li class="collection-item">' + msg.name + '</li>');
         });
-      }
+        $('form#broadcast').submit(function(event) {
+            socket.emit('my broadcast event', {data: $('#broadcast_data').val()});
+            return false;
+        });
     });
-  </script>-->
+  </script>
 {% endblock %}
