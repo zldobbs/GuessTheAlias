@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def LandingPage():
-	return render_template('LandingPage.html')
+	return render_template('landing.html')
 
 @app.route('/about', methods=['GET'])
 def AboutPage():
