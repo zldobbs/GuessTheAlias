@@ -1,25 +1,27 @@
 #!flask/bin/python
 import os, json
-from flask import Flask
+from flask import Flask, render_template
 from flask import request
+from random import choice
+from string import ascii_uppercase, digits
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def LandingPage():
-	pass
+	return render_template('LandingPage.html')
 
 @app.route('/about', methods=['GET'])
 def AboutPage():
 	pass
 
-@app.route('/generateCode', methods=['POST'])
+@app.route('/generateCode', methods=['GET'])
 def GenCode():
-	# return roomcode
-	pass
+	return ''.join(choice(ascii_uppercase + digits) for i in range(6))
+
 
 @app.route('/<code>', methods=['GET'])
-def RoomPage():
+def RoomPage(code):
 	pass
 
 if __name__ == "__main__":
