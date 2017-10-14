@@ -53,10 +53,10 @@
         }
       });
       socket.on('roomResponse', function(msg) {
-        if (!msg.roomCode) {
+        if (msg.roomCode == 'invalid') {
           window.location.replace("/");
         } else {
-          window.location.replace("/" + msg.roomCode);
+          window.location.replace("/room/" + msg.roomCode);
         }
       });
     });
