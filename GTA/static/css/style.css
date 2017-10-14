@@ -59,9 +59,12 @@ i {
 }
 
 #roomCode {
-  height: 85%;
+  font-size: 200%;
 }
 
 #waiting {
+  text-align: center;
   margin: 0 auto;
+  width: 150px;
+  height: 150px;
 }
