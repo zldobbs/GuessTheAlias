@@ -1,3 +1,9 @@
+{% if code is none %}
+  <h1>THE CODE IS NONE!</h1>
+  <script>
+    window.location.replace("/");
+  </script>
+{% endif %}
 {% extends "layout.html" %}
 {% block body %}
   <div class="container">
@@ -12,8 +18,6 @@
     <div class="row">
       <h1>Current Players</h1>
       <p>Wait in this room until the moderator begins the game...</p>
-      <!-- use ajax to keep current list going -->
-      <!-- waiting... or start button - use session variable to check id? -->
       <div class="row">
         <div class="col m8 push-m2 s12">
           <ul class="collection with-header" id="playerList">
