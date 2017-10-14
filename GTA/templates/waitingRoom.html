@@ -5,7 +5,7 @@
       <p>Share this link with your fellow playmates</p>
       <div class="col m6 push-m3 s12">
         <div class="card-panel">
-          <span id="roomCode">{{ request.args.get('code') }}</span>
+          <span id="roomCode">{{ request.args.post('code') }}</span>
         </div>
       </div>
     </div>
