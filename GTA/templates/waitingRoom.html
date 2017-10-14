@@ -26,16 +26,8 @@
         </div>
       </div>
       <div class="row">
-        {% if moderator %}
-          <a href="/play" class="btn-large waves-effect">Start Game</a>
-        {% else %}
-          <p>Please wait for the moderator to start the game</p>
-          <div class="col s4 push-s4 center-align">
-            <img  id="waiting"
-                  src="https://www.dnb.co.uk/content/dam/english/image-library/Modernization/other/loading-dots.gif"
-                  alt="waiting...">
-          </div>
-        {% endif %}
+        {% block wait %}
+        {% endblock %}
       </div>
     </div>
   </div>
