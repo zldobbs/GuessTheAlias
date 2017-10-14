@@ -34,15 +34,23 @@
   $(document).ready(function(){
       var socket = io.connect('http://' + document.domain + ':' + location.port + '/room');
       $('#joinButton').click(function() {
-        socket.emit('join', {
-          'name' : $('#name').val(),
-          'roomCode' : $('#roomCode').val()
-        });
+        if ($("#name").val() == "" || $("#roomCode").val() == "") {
+          Materialize.toast('Please specify a name and room code!', 5000);
+        } else {
+          socket.emit('join', {
+            'name' : $('#name').val(),
+            'roomCode' : $('#roomCode').val()
+          });
+        }
       });
       $('#createButton').click(function() {
-        socket.emit('create', {
-          'name' : $('#name').val()
-        });
+        if ($("#name").val() == "") {
+          Materialize.toast('Please specify a name!', 5000);
+        } else {
+          socket.emit('create', {
+            'name' : $('#name').val()
+          });
+        }
       });
       socket.on('roomResponse', function(msg) {
         if (!msg.roomCode) {
