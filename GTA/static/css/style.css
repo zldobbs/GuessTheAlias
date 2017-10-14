@@ -7,6 +7,16 @@
   min-width: 100%;
 }
 
-.container h1, .container p, .card-panel {
+.container h1, .container p, .card-panel, footer {
   text-align: center;
 }
+
+body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+ }
+
+ main {
+   flex: 1 0 auto;
+ }
