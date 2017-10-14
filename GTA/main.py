@@ -13,7 +13,7 @@ def LandingPage():
 
 @app.route('/about', methods=['GET'])
 def AboutPage():
-	pass
+	return render_template('about.html')
 
 @app.route('/generateCode', methods=['GET'])
 def GenCode():
