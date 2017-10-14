@@ -1,3 +1,7 @@
+* {
+  color: #000;
+}
+
 .nav-wrapper {
   padding: 10px;
 }
@@ -5,6 +9,11 @@
 .btn-large {
   margin: 0 auto;
   min-width: 100%;
+  background-color: #ec6f3f;
+}
+
+.btn-large:hover {
+  background-color: #ef8b65;
 }
 
 .container h1, .container p, .card-panel, footer {
@@ -15,8 +24,36 @@ body {
    display: flex;
    min-height: 100vh;
    flex-direction: column;
+   background-color: #f1eeeb;
  }
 
  main {
    flex: 1 0 auto;
  }
+
+ /* label color */
+ .input-field label {
+   color: #000;
+ }
+ /* label focus color */
+ .input-field input[type=text]:focus + label, input[type=text]:not(.browser-default):focus:not([readonly])+label {
+   color: #ec6f3f;
+ }
+ /* label underline focus color */
+ .input-field input[type=text]:focus, input[type=text]:not(.browser-default):focus:not([readonly]) {
+   border-bottom: 1px solid #ec6f3f;
+   box-shadow: 0 1px 0 0 #ef8b65;
+ }
+
+nav, .page-footer {
+  background-color: #00336d;
+  color: #FFF;
+}
+
+i {
+  color: #FFF;
+}
+
+#nameField {
+  border-bottom: 1px solid #000;
+}
