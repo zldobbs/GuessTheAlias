@@ -1,16 +1,45 @@
 {% extends "layout.html" %}
 {% block body %}
-  <div class="contianer">
+  <div class="container">
     <div class="row">
       <p>Share this link with your fellow playmates</p>
       <div class="card-panel">
-        <span>{{ roomCode }}</span>
+        <span>53xFI2</span>
       </div>
     </div>
     <div class="row">
       <h1>Current Players</h1>
+      <p>Wait in this room until the moderator begins the game...</p>
       <!-- use ajax to keep current list going -->
       <!-- waiting... or start button - use session variable to check id? -->
+      <div class="row">
+        <div class="col m8 push-m2 s12">
+          <ul class="collection with-header" id="playerList">
+            <li class="collection-header"><h4>Player List</h4></li>
+            <li class="collection-item">Jim</li>
+            <li class="collection-item">Jeff</li>
+            <li class="collection-item">Justin</li>
+            <li class="collection-item">Jared</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
+  <!--<script>
+    // update the waiting room...
+    $(function() {
+      var table = setInterval(fillTable(), 5000);
+
+      function fillTable() {
+        $.ajax({
+          url: '/findUsers',
+          data: 'roomCode',
+          type: 'GET',
+          success: function(response) {
+            $('#playerList').append('<li>' + response + '</li>');
+          }
+        });
+      }
+    });
+  </script>-->
 {% endblock %}
