@@ -55,5 +55,6 @@ i {
 }
 
 #nameField {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #7c7c7c;
+  font-size: 18vh;
 }
