@@ -36,6 +36,7 @@ class Players(Base):
     __tablename__ = 'Players'
 
     userID = Column(Integer, primary_key=True)
+    Name = Column(String(100))
     hint1 = Column(Text, nullable=True)
     hint2 = Column(Text, nullable=True)
     hint3 = Column(Text, nullable=True)
