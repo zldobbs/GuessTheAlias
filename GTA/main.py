@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = 'FF137EE9744FFBEFC1495D3FA08A639FD9F7B57330212F30B470EA2BFB5CCF5B'
 socketio = SocketIO(app)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def LandingPage():
 	if 'userID' not in session:
 		userID = ''.join(choice(hexdigits) for i in range(16))
@@ -22,15 +22,22 @@ def LandingPage():
 def AboutPage():
 	return render_template('about.html')
 
-@app.route('/generateCode', methods=['GET'])
-def GenCode():
+@app.route('/createRoom', methods=['GET']) # change to createRoom at frontend
+def createRoom():
 	roomCode = ''.join(choice(ascii_uppercase + digits) for i in range(6))
-	return redirect(url_for('.RoomPage', code=roomCode))
+	return redirect(url_for('.RoomPage', code=roomCode, moderator=True))
+
+@app.route('/joinRoom', methods=['POST']) # change to createRoom at frontend
+def joinRoom():
+	roomCode = request.form["roomCode"]
+	# check for existing room before redirecting
+	return redirect(url_for('.RoomPage', code=roomCode, moderator=False))
 
 @app.route('/room', methods=['GET'])
 def RoomPage():
 	roomCode = request.args['code']
-	return roomCode + ' ' + session['userID']
+	return render_template('waitingRoom.html', code=roomCode)
+	# return roomCode + ' ' + session['userID']
 
 @socketio.on('connect', namespace='/room')
 def connected():
