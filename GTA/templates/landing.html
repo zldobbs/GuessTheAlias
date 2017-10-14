@@ -1,27 +1,27 @@
 {% extends "layout.html" %}
 {% block body %}
-  <div class="row">
-    <div class="container">
+  <div class="container">
+    <div class="row">
       <h1>Guess the Alias</h1>
       <p>If you have a room ID already, enter it below. If you're here to create a room, click the create button</p>
       {% if error %}<div class="card-panel deep-orange-darken-3"><span class="white-text"><strong>Error:</strong> {{ error }}{% endif %}</span></div>
-      <form action="/" method="post">
-        <div class="row">
-          <div class="input-field col m6 push-m3 s12">
-            <input id="roomCode" type="text" class="validate">
-            <label for="roomCode">Room Code:</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col m6 push-m3 s12">
-            <button class="btn-large waves-effect waves-light" type="submit" name="action">Join</button>
-          </div>
-        </div>
-      </form>
+    </div>
+    <form action="/" method="post">
       <div class="row">
-        <div class="col m6 push-m3 s12">
-          <a class="btn-large waves-effect waves-light" href="/generateCode">Create</a>
+        <div class="input-field col m6 push-m3 s12">
+          <input id="roomCode" type="text" class="validate">
+          <label for="roomCode">Room Code:</label>
         </div>
+      </div>
+      <div class="row">
+        <div class="input-field col m6 push-m3 s12">
+          <button class="btn-large waves-effect waves-light" type="submit" name="action">Join</button>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col m6 push-m3 s12">
+        <a class="btn-large waves-effect waves-light" href="/generateCode">Create</a>
       </div>
     </div>
   </div>

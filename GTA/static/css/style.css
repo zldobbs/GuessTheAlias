@@ -6,3 +6,7 @@
   margin: 0 auto;
   min-width: 100%;
 }
+
+.container h1, .container p {
+  text-align: center;
+}

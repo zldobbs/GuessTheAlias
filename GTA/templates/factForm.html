@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <h1>Game Prep</h1>
+      <p>Provide 6 witty facts to describe yourself!</p>
+    </div>
+    <form action="/sendHints" method="post">
+      <div class="row">
+        <div class="input-field col m6 push-m3 s12">
+          <input id="hint1" type="text" class="validate">
+          <label for="hint2">Hint 1</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col m6 push-m3 s12">
+          <input id="hint2" type="text" class="validate">
+          <label for="hint2">Hint 2</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col m6 push-m3 s12">
+          <input id="hint3" type="text" class="validate">
+          <label for="hint3">Hint 3</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col m6 push-m3 s12">
+          <input id="hint4" type="text" class="validate">
+          <label for="hint4">Hint 4</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col m6 push-m3 s12">
+          <input id="hint5" type="text" class="validate">
+          <label for="hint5">Hint 5</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col m6 push-m3 s12">
+          <input id="hint6" type="text" class="validate">
+          <label for="hint6">Hint 6</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col m6 push-m3 s12">
+          <button class="btn-large waves-effect waves-light" type="submit" name="action">Submit Hints</button>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}
