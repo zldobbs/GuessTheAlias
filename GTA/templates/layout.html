@@ -11,17 +11,38 @@
     <link href="static/css/style.css" rel="stylesheet">
   </head>
   <body>
+
     <!-- navbar -->
-    <nav>
-      <div class="nav-wrapper">
-         <a href="/" class="brand-logo"><i class="material-icons">face</i>Guess the Alias</a>
-         <ul class="right hide-on-med-and-down">
-          <li><a href="/about">About</a></li>
-        </ul>
+    <header>
+      <nav>
+        <div class="nav-wrapper">
+           <a href="/" class="brand-logo"><i class="material-icons">face</i>Guess the Alias</a>
+           <ul class="right hide-on-med-and-down">
+            <li><a href="/about">About</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      {% block body %}
+      {% endblock %}
+    </main>
+
+
+    <footer class="page-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col m6 s12">
+            <a class="white-text" href="mailto:zld6fd@mail.missouri.edu">© 2017 Team Hentai - TigerHacks</a>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <a class="white-text" href="/about">How to Play</a>
+          </div>
+        </div>
       </div>
-    </nav>
-    {% block body %}
-    {% endblock %}
+    </footer>
+
     <!-- jQuery CDN -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- Materialize js CDN -->

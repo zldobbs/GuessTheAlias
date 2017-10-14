@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="contianer">
+    <div class="row">
+      <p>Share this link with your fellow playmates</p>
+      <div class="card-panel">
+        <span>{{ roomCode }}</span>
+      </div>
+    </div>
+    <div class="row">
+      <h1>Current Players</h1>
+      <!-- use ajax to keep current list going -->
+      <!-- waiting... or start button - use session variable to check id? -->
+    </div>
+  </div>
+{% endblock %}

@@ -1,6 +1,5 @@
 .nav-wrapper {
   padding: 10px;
-  padding-bottom: 50px;
 }
 
 .btn-large {
@@ -8,6 +7,6 @@
   min-width: 100%;
 }
 
-.container h1, .container p {
+.container h1, .container p, .card-panel {
   text-align: center;
 }
