@@ -54,10 +54,10 @@ class Players(Base):
     # Username = root
     # password = password
 
-engine = create_engine('sqlite:///sqlalchemy_example.db')
-# engine = create_engine('mysql://root:password@ec2-34-204-52-88.compute-1.amazonaws.com') # connect to server
-# engine.execute("CREATE DATABASE IF NOT EXISTS gta") #create db
-# engine.execute("USE gta") # select db
+engine = create_engine('mysql:///sqlalchemy_example.db')
+# engine = create_engine('mysql://tiger:hentai@e34.204.52.88') # connect to server
+engine.execute("CREATE DATABASE IF NOT EXISTS gta") #create db
+engine.execute("USE gta") # select db
 
 # Create all tables in the engine
 Base.metadata.create_all(engine)
