@@ -4,7 +4,7 @@
     <h1>Guess the Alias!</h1>
     <p>If you have a room ID already, enter it below. If you're here to create a room, click the create button</p>
     {% if error %}<div class="card-panel deep-orange-darken-3"><span class="white-text"><strong>Error:</strong> {{ error }}{% endif %}</span></div>
-    <form action="{{ url_for('landing') }}" method="post">
+    <form action="/" method="post">
       <div class="input-field col s12">
         <input id="roomCode" type="text" class="validate">
         <label for="roomCode">Room Code:</label>
@@ -15,7 +15,7 @@
     </form>
     <div class="row">
       <div class="input-field col s12">
-        <a class="btn waves-effect waves-light" href="{{ url_for('generateCode') }}">Create</button>
+        <a class="btn waves-effect waves-light" href="/generateCode">Create</button>
       </div>
     </div>
   </div>
