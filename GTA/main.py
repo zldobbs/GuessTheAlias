@@ -1,6 +1,7 @@
 #!flask/bin/python
 import os, json
 from flask import Flask, render_template, request, redirect, url_for, session
+from sqlalchemy import sql
 from random import choice
 from string import ascii_uppercase, digits, hexdigits
 
@@ -36,6 +37,11 @@ def getHints():
 @app.route('/testFactForm', methods=['GET'])
 def testFactForm():
 	return render_template('factForm.html')
+
+# temp route for testing
+@app.route('/testWaitingRoom', methods=['GET'])
+def testFactForm():
+	return render_template('waitingRoom.html')
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
