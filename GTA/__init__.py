@@ -1,1 +1,1 @@
-from .GTA import app
+from .main import app
