@@ -73,25 +73,19 @@ def LandingPage():
 def AboutPage():
 	return render_template('about.html')
 
-
-@socketio.on('connect', namespace='/room')
-def connected():
-	emit('response', {'name': 'Alice'})
-
-@socketio.on('join', namespace='/room')
-def joinRoom(data):
+@app.route('/joinRoom', methods=['POST'])
+def joinRoom():
 	roomCode = data['roomCode']
 	if roomExists(roomCode):
-		join_room(roomCode)
-		emit('roomResponse', {'roomCode': roomCode})
+		#set player room in DB
+		return redirect(url_for('.roomPage') + '/' + roomCode)
 	else:
-		emit('roomResponse', {'roomCode': 'invalid'})
+		return redirect(url_for('.LandingPage'))
 
-@socketio.on('create', namespace='/room')
-def createRoom(data):
+@app.route('/createRoom', methods=['POST'])
+def createRoom():
 	roomCode = ''.join(choice(ascii_uppercase + digits) for i in range(6))
-	join_room(roomCode)
-
+	"""
 	playerEntry = Players(
 		userID = session['userID'],
 		name = str(data['name']),
@@ -102,7 +96,7 @@ def createRoom(data):
 		hint5 = '',
 		hint6 = '',
 		readyStatus = False,
-		color_FK = 'red',
+		color_FK = '',
 		rooms_FK = roomCode
 	)
 	roomEntry = Rooms(
@@ -114,8 +108,8 @@ def createRoom(data):
 	db.session.add(roomEntry)
 	db.session.add(playerEntry)
 	db.session.commit()
-
-	emit('roomResponse', {'roomCode': roomCode})
+	"""
+	return redirect(url_for('.roomPage') + '/' + roomCode)
 
 @app.route('/room/<roomCode>', methods=['GET'])
 def roomPage(roomCode):
@@ -125,22 +119,15 @@ def roomPage(roomCode):
 		return render_template('waitingRoomUser.html', code=roomCode)
 	return redirect(url_for('.LandingPage'))
 
-@socketio.on('start', namespace='/room')
-def startGame(data):
-	roomCode = data['roomCode']
-	if userIsMod(roomCode, session['userID']):
-		emit('beginGame', room=roomCode)
-
 def roomExists(roomCode):
 	return True
 
 def userIsMod(roomCode, userID):
 	return True
 
-@socketio.on('getUserID', namespace='/getUserID')
-def GetUserID():
-	emit('UserID response', {'userID': session['userID']})
-
+@app.route('/getRoomState', methods=['GET'])
+def getRoomState():
+	pass
 
 
 @app.route('/sendHints', methods=['POST'])
