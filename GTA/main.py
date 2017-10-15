@@ -75,7 +75,7 @@ def AboutPage():
 
 @app.route('/joinRoom', methods=['POST'])
 def joinRoom():
-	roomCode = data['roomCode']
+	roomCode = request.form['roomCode']
 	if roomExists(roomCode):
 		#set player room in DB
 		return redirect(url_for('.roomPage') + '/' + roomCode)
