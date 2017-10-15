@@ -6,7 +6,7 @@
       <p>Welcome to Guess the Alias! Please specify your name and room ID to get started</p>
       {% if error %}<div class="card-panel deep-orange-darken-3"><span class="white-text"><strong>Error:</strong> {{ error }}{% endif %}</span></div>
     </div>
-    <form action="/joinRoom" method="post">
+    <form action="/room" method="post">
       <div class="row">
         <div class="input-field col m3 push-m3 s12">
           <input id="name" type="text" name="name" class="validate" required>
