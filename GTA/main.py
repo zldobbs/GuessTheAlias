@@ -17,7 +17,7 @@ socketio = SocketIO(app)
 
 from flask_sqlalchemy import SQLAlchemy
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlalchemy_gta.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tiger:hentai@34.204.52.88/gta.db'
 db = SQLAlchemy(app)
 
 
@@ -73,43 +73,43 @@ def LandingPage():
 def AboutPage():
 	return render_template('about.html')
 
-@app.route('/joinRoom', methods=['POST'])
-def joinRoom():
-	roomCode = request.form['roomCode']
-	if roomExists(roomCode):
-		#set player room in DB
-		return redirect(url_for('.roomPage') + '/' + roomCode)
-	else:
-		return redirect(url_for('.LandingPage'))
+@app.route('/room', methods=['POST'])
+def room():
+	if request.form['action'] == 'join':
+		roomCode = request.form['roomCode']
+		if roomExists(roomCode):
+			#set player room in DB
+			return redirect('/room/' + roomCode)
+		else:
+			return redirect(url_for('.LandingPage'))
 
-@app.route('/createRoom', methods=['POST'])
-def createRoom():
-	roomCode = ''.join(choice(ascii_uppercase + digits) for i in range(6))
-	"""
-	playerEntry = Players(
-		userID = session['userID'],
-		name = str(data['name']),
-		hint1 = '',
-		hint2 = '',
-		hint3 = '',
-		hint4 = '',
-		hint5 = '',
-		hint6 = '',
-		readyStatus = False,
-		color_FK = '',
-		rooms_FK = roomCode
-	)
-	roomEntry = Rooms(
-		roomID = roomCode,
-		roomState = 'lobby',
-		currentAlias_FK = '',
-		roomCreator_FK = session['userID']
-	)
-	db.session.add(roomEntry)
-	db.session.add(playerEntry)
-	db.session.commit()
-	"""
-	return redirect(url_for('.roomPage') + '/' + roomCode)
+	if request.form['action'] == 'create':
+		roomCode = ''.join(choice(ascii_uppercase + digits) for i in range(6))
+
+		playerEntry = Players(
+			userID = session['userID'],
+			name = str(data['name']),
+			hint1 = '',
+			hint2 = '',
+			hint3 = '',
+			hint4 = '',
+			hint5 = '',
+			hint6 = '',
+			readyStatus = False,
+			color_FK = '',
+			rooms_FK = roomCode
+		)
+		roomEntry = Rooms(
+			roomID = roomCode,
+			roomState = 'lobby',
+			currentAlias_FK = '',
+			roomCreator_FK = session['userID']
+		)
+		db.session.add(roomEntry)
+		db.session.add(playerEntry)
+		db.session.commit()
+
+		return redirect('/room/' + roomCode)	
 
 @app.route('/room/<roomCode>', methods=['GET'])
 def roomPage(roomCode):
