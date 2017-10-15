@@ -6,33 +6,38 @@
       <p>Welcome to Guess the Alias! Please specify your name and room ID to get started</p>
       {% if error %}<div class="card-panel deep-orange-darken-3"><span class="white-text"><strong>Error:</strong> {{ error }}{% endif %}</span></div>
     </div>
-    <div class="row">
-      <div class="input-field col m3 push-m3 s12">
-        <input id="name" type="text" class="validate">
-        <label for="name">Name:</label>
+    <form action="/joinRoom" method="post">
+      <div class="row">
+        <div class="input-field col m3 push-m3 s12">
+          <input id="name" type="text" name="name" class="validate" required>
+          <label for="name">Name:</label>
+        </div>
+        <div class="input-field col m3 push-m3 s12">
+          <input id="roomCode" type="text" name="roomCode" class="validate">
+          <label for="roomCode">Room Code:</label>
+        </div>
       </div>
-      <div class="input-field col m3 push-m3 s12">
-        <input id="roomCode" type="text" class="validate">
-        <label for="roomCode">Room Code:</label>
+      <div class="row">
+        <div class="input-field col m6 push-m3 s12">
+          <button class="btn-large waves-effect" name="action" type="submit" value="join">Join</button>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="input-field col m6 push-m3 s12">
-        <button class="btn-large waves-effect" id="joinButton" value="join">Join</button>
+      <div class="row">
+        <p class="center-align">If you do not have a room ID, you may create your own and begin inviting friends!</p>
       </div>
-    </div>
-    <div class="row">
-      <p class="center-align">If you do not have a room ID, you may create your own and begin inviting friends!</p>
-    </div>
-    <div class="row">
-      <div class="input-field col m6 push-m3 s12">
-        <button class="btn-large waves-effect" id="createButton" value="create">Create</button>
+      <div class="row">
+        <div class="input-field col m6 push-m3 s12">
+          <button class="btn-large waves-effect" name="action" type="submit" value="create">Create</button>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
-  <script>
+<!--  <script>
     $(document).ready(function(){
-      var socket = io.connect('http://' + document.domain + ':' + location.port + '/room');
+      var socket = io.connect('http://' + document.domain + ':' + location.port + '/room', {
+        transports: ['websocket'],
+        upgrade: false
+      });
       $('#joinButton').click(function() {
         if ($("#name").val() == "" || $("#roomCode").val() == "") {
           Materialize.toast('Please specify a name and room code!', 3000);
@@ -60,5 +65,5 @@
         }
       });
     });
-  </script>
+  </script> -->
 {% endblock %}
